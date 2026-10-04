@@ -1,0 +1,221 @@
+﻿@{
+    ViewData["Title"] = "Каталог пива - Space Rig Bar";
+}
+
+<style>
+    /* Базові стилі та шрифти */
+    @@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
+
+    :root {
+        --bg-dark: #0b0e14;
+        --card-bg: #161b26;
+        --gold: #ffb700;
+        --text: #e2e8f0;
+        --text-dim: #8b9bb4;
+        --border-color: #2a3447;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-dark);
+        color: var(--text);
+        font-family: 'Share Tech Mono', monospace;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Навігація */
+    .drg-nav {
+        background: #111520;
+        border-bottom: 2px solid var(--gold);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .brand {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 900;
+        font-size: 1.4rem;
+        color: var(--gold);
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px rgba(255, 183, 0, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav-btn {
+        font-family: 'Orbitron', sans-serif;
+        color: var(--text);
+        text-decoration: none;
+        padding: 10px 20px;
+        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+        .nav-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 12px rgba(255, 183, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: var(--gold);
+            color: #000;
+            font-weight: bold;
+        }
+
+    /* Контейнер каталогу */
+    .catalog-container {
+        flex: 1;
+        max-width: 1000px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .catalog-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+    }
+
+    .catalog-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2.2rem;
+        color: #fff;
+        margin: 0 0 0.5rem 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .catalog-subtitle {
+        color: var(--gold);
+        font-size: 1rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    /* Сітка картках товарів */
+    .beer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+    }
+
+    /* Картка товару - тільки з назвою */
+    .beer-card {
+        background: var(--card-bg);
+        border: 2px solid var(--border-color);
+        padding: 3rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+        .beer-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(255, 183, 0, 0.25);
+        }
+
+        .beer-card::before {
+            content: 'BEER ID';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: var(--border-color);
+            color: var(--text-dim);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            transition: all 0.3s ease;
+        }
+
+        .beer-card:hover::before {
+            background: var(--gold);
+            color: #000;
+        }
+
+    .beer-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.4rem;
+        color: #fff;
+        margin: 0;
+        text-align: center;
+        transition: color 0.2s ease;
+    }
+
+    .beer-card:hover .beer-title {
+        color: var(--gold);
+    }
+
+    @@media (max-width: 650px) {
+        .drg-nav {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .catalog-title {
+            font-size: 1.6rem;
+        }
+    }
+</style>
+
+<!-- Навігація -->
+<nav class="drg-nav">
+    <div class="brand">
+        ⛏️ SPACE RIG BAR
+    </div>
+    <div class="nav-links">
+        <a href="https://localhost:7086/Home/Index" class="nav-btn">Головна</a>
+        <a href="https://localhost:7086/Home/About" class="nav-btn">Про нас</a>
+        <a href="https://localhost:7086/Product/Index" class="nav-btn active">Каталог пива</a>
+    </div>
+</nav>
+
+<!-- Каталог -->
+<main class="catalog-container">
+    <div class="catalog-header">
+        <h1 class="catalog-title">МЕНЮ БАРУ ЛЛОЙДА</h1>
+        <div class="catalog-subtitle">// Натисни на картку для перегляду деталей</div>
+    </div>
+
+    <div class="beer-grid">
+        <!-- Товар 1 -->
+        <a href="https://localhost:7086/Product/Details/1" class="beer-card">
+            <h2 class="beer-title">Oily Oaf Brew</h2>
+        </a>
+
+        <!-- Товар 2 -->
+        <a href="https://localhost:7086/Product/Details/2" class="beer-card">
+            <h2 class="beer-title">Glyphid Slammer</h2>
+        </a>
+
+        <!-- Товар 3 -->
+        <a href="https://localhost:7086/Product/Details/3" class="beer-card">
+            <h2 class="beer-title">Leaf Lover's Special</h2>
+        </a>
+    </div>
+</main>

@@ -1,0 +1,26 @@
+## Visual Studio & .NET Build Output
+[Bb]in/
+[Oo]bj/
+out/
+.vs/
+.vscode/
+.idea/
+
+## User-specific files
+*.user
+*.userosscache
+*.sln.docstates
+
+## Dynamic Link Libraries & Executables (за потреби)
+*.exe
+*.dll
+*.pdb
+
+## Appsettings override (щоб не злити секрети)
+appsettings.Development.json
+*.Local.json
+
+## OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini

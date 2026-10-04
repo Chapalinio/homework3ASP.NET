@@ -1,0 +1,260 @@
+﻿@{
+    ViewData["Title"] = $"{ViewBag.name} - Details";
+}
+
+<style>
+    /* Базовые стили и шрифты */
+    @@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
+
+    :root {
+        --bg-dark: #0b0e14;
+        --card-bg: #161b26;
+        --gold: #ffb700;
+        --morkite: #00ffd5;
+        --text: #e2e8f0;
+        --text-dim: #8b9bb4;
+        --border-color: #2a3447;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-dark);
+        color: var(--text);
+        font-family: 'Share Tech Mono', monospace;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Навигация */
+    .drg-nav {
+        background: #111520;
+        border-bottom: 2px solid var(--gold);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .brand {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 900;
+        font-size: 1.4rem;
+        color: var(--gold);
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px rgba(255, 183, 0, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav-btn {
+        font-family: 'Orbitron', sans-serif;
+        color: var(--text);
+        text-decoration: none;
+        padding: 10px 20px;
+        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        transition: all 0.2s ease;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+        .nav-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 12px rgba(255, 183, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: var(--gold);
+            color: #000;
+            font-weight: bold;
+        }
+
+    /* Контейнер деталей товара */
+    .details-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2.5rem 1.5rem;
+    }
+
+    .details-card {
+        position: relative;
+        background: var(--card-bg);
+        border: 2px solid var(--gold);
+        max-width: 850px;
+        width: 100%;
+        box-shadow: 0 0 35px rgba(0,0,0,0.9), inset 0 0 15px rgba(255, 183, 0, 0.1);
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 0;
+        overflow: hidden;
+    }
+
+        .details-card::before {
+            content: 'BEER SPECIFICATION // BAR TERMINAL';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--gold);
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 3px 10px;
+            z-index: 2;
+        }
+
+    /* Блок с изображением */
+    .details-image-wrapper {
+        position: relative;
+        background: #0d111a;
+        border-right: 2px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+    }
+
+    .details-image {
+        max-width: 100%;
+        max-height: 280px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 15px rgba(255, 183, 0, 0.3));
+    }
+
+    /* Информационный блок */
+    .details-info {
+        padding: 3rem 2rem 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .product-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2rem;
+        color: #fff;
+        margin: 0 0 0.5rem 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .product-price-badge {
+        display: inline-block;
+        background: rgba(255, 183, 0, 0.15);
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 6px 14px;
+        margin-bottom: 1.5rem;
+        width: fit-content;
+    }
+
+    .product-description {
+        color: var(--text-dim);
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        flex-grow: 1;
+    }
+
+    .details-actions {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn-back {
+        background: transparent;
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        padding: 12px 24px;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.2s ease;
+        display: inline-block;
+    }
+
+        .btn-back:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 15px rgba(255, 183, 0, 0.4);
+        }
+
+    @@media (max-width: 768px) {
+        .drg-nav {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .details-card {
+            grid-template-columns: 1fr;
+        }
+
+        .details-image-wrapper {
+            border-right: none;
+            border-bottom: 2px solid var(--border-color);
+            height: 220px;
+        }
+
+        .details-info {
+            padding: 2rem 1.5rem;
+        }
+    }
+</style>
+
+<!-- Навигация -->
+<nav class="drg-nav">
+    <div class="brand">
+        ⛏️ SPACE RIG BAR
+    </div>
+    <div class="nav-links">
+        <a href="https://localhost:7086/Home/Index" class="nav-btn">Головна</a>
+        <a href="https://localhost:7086/Home/About" class="nav-btn">Про нас</a>
+        <a href="https://localhost:7086/Product/Index" class="nav-btn active">Каталог пива</a>
+    </div>
+</nav>
+
+<!-- Карточка товара -->
+<main class="details-container">
+    <div class="details-card">
+        <div class="details-image-wrapper">
+            <img src="@ViewBag.imgUrl" alt="@ViewBag.name" class="details-image" />
+        </div>
+
+        <div class="details-info">
+            <div>
+                <h1 class="product-title">@ViewBag.name</h1>
+                <div class="product-price-badge">
+                    ⚡ Ціна: @ViewBag.price Кредитів
+                </div>
+                <p class="product-description">
+                    @ViewBag.description
+                </p>
+            </div>
+
+            <div class="details-actions">
+                <a asp-controller="Product" asp-action="Index" class="btn-back">
+                    ← Назад до каталогу
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
